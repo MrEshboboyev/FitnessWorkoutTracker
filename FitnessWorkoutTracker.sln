@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35209.166
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessWorkoutTracker.Domain", "FitnessWorkoutTracker.Domain\FitnessWorkoutTracker.Domain.csproj", "{C8149325-46B1-403B-A7D2-870FA19D4207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessWorkoutTracker.Application", "FitnessWorkoutTracker.Application\FitnessWorkoutTracker.Application.csproj", "{082204B1-A5C8-4B70-917C-8DB759E68335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessWorkoutTracker.Infrastructure", "FitnessWorkoutTracker.Infrastructure\FitnessWorkoutTracker.Infrastructure.csproj", "{A80523BB-FE9F-43D5-A8DA-C7682413C3A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessWorkoutTracker.Presentation", "FitnessWorkoutTracker.Presentation\FitnessWorkoutTracker.Presentation.csproj", "{B7F61C06-195A-4E0D-B21A-C636C9DEDE83}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8149325-46B1-403B-A7D2-870FA19D4207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8149325-46B1-403B-A7D2-870FA19D4207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8149325-46B1-403B-A7D2-870FA19D4207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8149325-46B1-403B-A7D2-870FA19D4207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{082204B1-A5C8-4B70-917C-8DB759E68335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{082204B1-A5C8-4B70-917C-8DB759E68335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{082204B1-A5C8-4B70-917C-8DB759E68335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{082204B1-A5C8-4B70-917C-8DB759E68335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80523BB-FE9F-43D5-A8DA-C7682413C3A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80523BB-FE9F-43D5-A8DA-C7682413C3A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80523BB-FE9F-43D5-A8DA-C7682413C3A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80523BB-FE9F-43D5-A8DA-C7682413C3A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7F61C06-195A-4E0D-B21A-C636C9DEDE83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F61C06-195A-4E0D-B21A-C636C9DEDE83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F61C06-195A-4E0D-B21A-C636C9DEDE83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F61C06-195A-4E0D-B21A-C636C9DEDE83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
