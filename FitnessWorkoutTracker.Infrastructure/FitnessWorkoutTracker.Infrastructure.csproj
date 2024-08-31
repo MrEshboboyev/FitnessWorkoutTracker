@@ -11,4 +11,10 @@
     <ProjectReference Include="..\FitnessWorkoutTracker.Domain\FitnessWorkoutTracker.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Persistence\" />
+  </ItemGroup>
+
 </Project>
