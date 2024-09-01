@@ -68,7 +68,9 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             try
             {
                 // sign in this user
-                await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                if (!result.Succeeded) 
+                    throw new Exception("Email/Password is incorrect!");
 
                 // getting this user
                 var user = await _userManager.FindByEmailAsync(model.Email);
