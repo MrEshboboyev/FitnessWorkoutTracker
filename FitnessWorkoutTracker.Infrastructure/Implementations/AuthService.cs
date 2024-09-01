@@ -32,8 +32,8 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Key"]);
-                var issuer = _configuration["JwtSettings:Key"];
-                var audience = _configuration["JwtSettings:Key"];
+                var issuer = _configuration["JwtSettings:Issuer"];
+                var audience = _configuration["JwtSettings:Audience"];
 
                 var claimList = new List<Claim>
                 {
