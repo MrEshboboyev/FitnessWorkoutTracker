@@ -1,51 +1,22 @@
-﻿using FitnessWorkoutTracker.Application.Interfaces;
+﻿using FitnessWorkoutTracker.Application.Common.Interfaces;
 using FitnessWorkoutTracker.Domain.Entities;
 using FitnessWorkoutTracker.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+using FitnessWorkoutTracker.Infrastructure.Repositories;
 
-namespace FitnessExerciseTracker.Infrastructure.Repositories
+namespace FitnessWorkoutTracker.Infrastructure.Repositories
 {
-    public class ExerciseRepository : IExerciseRepository
+    public class ExerciseRepository : Repository<Exercise>, IExerciseRepository
     {
         private readonly AppDbContext _db;
 
-        public ExerciseRepository(AppDbContext db)
+        public ExerciseRepository(AppDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public async Task AddAsync(Exercise exercise)
-        {
-            await _db.Exercises.AddAsync(exercise);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task<Exercise> GetByIdAsync(Guid id)
-        {
-            return await _db.Exercises.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<Exercise>> GetByWorkoutIdAsync(Guid workoutId)
-        {
-            return await _db.Exercises
-                .Where(e => e.WorkoutId == workoutId)
-                .ToListAsync();
-        }
-
-        public async Task RemoveAsync(Guid id)
-        {
-            var exercise = await GetByIdAsync(id);
-            if (exercise != null)
-            {
-                _db.Exercises.Remove(exercise);
-                await _db.SaveChangesAsync();
-            }
-        }
-
-        public async Task UpdateAsync(Exercise exercise)
+        public void Update(Exercise exercise)
         {
             _db.Exercises.Update(exercise);
-            await _db.SaveChangesAsync();
         }
     }
 }
