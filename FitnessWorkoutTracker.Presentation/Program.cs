@@ -1,6 +1,8 @@
 using FitnessWorkoutTracker.Application.Common.Interfaces;
+using FitnessWorkoutTracker.Application.Services.Interfaces;
 using FitnessWorkoutTracker.Domain.Entities;
 using FitnessWorkoutTracker.Infrastructure.Data;
+using FitnessWorkoutTracker.Infrastructure.Implementations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +27,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 // adding lifetime for services
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
