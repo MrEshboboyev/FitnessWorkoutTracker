@@ -1,16 +1,16 @@
 ﻿using FitnessWorkoutTracker.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessWorkoutTracker.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Comment> Comments { get; set; }
@@ -20,7 +20,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
 
             // Configuring One-to-Many relationship between User and Workouts
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Workouts)
                 .WithOne(w => w.User)
                 .HasForeignKey(w => w.UserId)

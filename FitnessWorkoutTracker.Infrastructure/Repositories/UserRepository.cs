@@ -4,7 +4,7 @@ using FitnessWorkoutTracker.Infrastructure.Data;
 
 namespace FitnessWorkoutTracker.Infrastructure.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<ApplicationUser>, IUserRepository
     {
         private readonly AppDbContext _db;
 
@@ -13,7 +13,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Repositories
             _db = db;
         }
 
-        public void Update(User user)
+        public void Update(ApplicationUser user)
         {
             _db.Users.Update(user);
         }

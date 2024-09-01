@@ -2,8 +2,8 @@
 
 namespace FitnessWorkoutTracker.Application.Common.Interfaces
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<ApplicationUser>
     {
-        void Update(User user); 
+        void Update(ApplicationUser user); 
     }
 }
