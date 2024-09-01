@@ -82,6 +82,12 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
+                var workout = _unitOfWork.Workout.Get(w => w.Id == exerciseCreateDTO.WorkoutId
+                    && w.UserId == exerciseCreateDTO.UserId);
+
+                if (workout == null)
+                    throw new Exception($"Workout Id : '{exerciseCreateDTO.WorkoutId}' not found.");
+
                 Exercise exercise = new()
                 {
                     Name = exerciseCreateDTO.Name,
@@ -103,12 +109,21 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                var exerciseFromDb = _unitOfWork.Exercise.Get(e => e.Id == exerciseUpdateDTO.Id);
-                
+                var workout = _unitOfWork.Workout.Get(w => w.Id == exerciseUpdateDTO.WorkoutId
+                    && w.UserId == exerciseUpdateDTO.UserId);
+
+                if (workout == null)
+                    throw new Exception("Workout not found.");
+
+                var exerciseFromDb = _unitOfWork.Exercise.Get(e => e.Id == exerciseUpdateDTO.Id && 
+                    e.WorkoutId == workout.Id);
+
+                if (workout == null || exerciseFromDb == null)
+                    throw new Exception("Exercise not found."); 
+
                 exerciseFromDb.Name = exerciseUpdateDTO.Name;
                 exerciseFromDb.Reps = exerciseUpdateDTO.Reps;
                 exerciseFromDb.Sets = exerciseUpdateDTO.Sets;
-                exerciseFromDb.WorkoutId = exerciseUpdateDTO.WorkoutId;
 
                 _unitOfWork.Exercise.Update(exerciseFromDb);
                 _unitOfWork.Save();
@@ -123,7 +138,17 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                var exerciseFromDb = _unitOfWork.Exercise.Get(e => e.Id == exerciseRemoveDTO.Id);
+                var workout = _unitOfWork.Workout.Get(w => w.Id == exerciseRemoveDTO.WorkoutId
+                    && w.UserId == exerciseRemoveDTO.UserId);
+
+                if (workout == null)
+                    throw new Exception("Workout not found.");
+
+                var exerciseFromDb = _unitOfWork.Exercise.Get(e => e.Id == exerciseRemoveDTO.Id &&
+                    e.WorkoutId == workout.Id);
+
+                if (exerciseFromDb == null)
+                    throw new Exception("Exercise not found.");
 
                 _unitOfWork.Exercise.Remove(exerciseFromDb);
                 _unitOfWork.Save();
@@ -133,6 +158,5 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
                 throw new Exception(ex.Message);
             }
         }
-
     }
 }

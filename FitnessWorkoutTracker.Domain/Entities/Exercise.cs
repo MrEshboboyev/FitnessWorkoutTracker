@@ -1,4 +1,6 @@
-﻿namespace FitnessWorkoutTracker.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace FitnessWorkoutTracker.Domain.Entities
 {
     public class Exercise
     {
@@ -10,6 +12,7 @@
 
 
         // Navigation Property
+        [JsonIgnore]
         public Workout Workout { get; set; }
     }
 }

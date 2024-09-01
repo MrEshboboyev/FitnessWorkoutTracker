@@ -113,6 +113,9 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
                 var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == workoutRemoveDTO.UserId 
                     && w.Id == workoutRemoveDTO.Id);
 
+                if (workoutFromDb == null)
+                    throw new Exception("Workout not found!");
+
                 _unitOfWork.Workout.Remove(workoutFromDb);
                 _unitOfWork.Save();
             }
