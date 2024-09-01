@@ -3,7 +3,7 @@
     public class Exercise
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public int WorkoutId { get; set; }
+        public Guid WorkoutId { get; set; }
         public string Name { get; set; }
         public int Reps { get; set; }
         public int Sets { get; set; }
