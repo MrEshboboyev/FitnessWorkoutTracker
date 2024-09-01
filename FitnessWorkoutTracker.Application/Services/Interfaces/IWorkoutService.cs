@@ -6,7 +6,8 @@ namespace FitnessWorkoutTracker.Application.Services.Interfaces
     public interface IWorkoutService
     {
         Task<IEnumerable<Workout>> GetUserWorkoutsAsync(string userId);
-        Task<IEnumerable<Workout>> GetUserWorkoutsByWorkoutNameAsync(string workoutName);
+        Task<IEnumerable<Workout>> GetUserWorkoutsByWorkoutNameAsync(string userId, string workoutName);
+        Task<IEnumerable<Workout>> GetWorkoutsByWorkoutNameAsync(string workoutName);
         Task CreateUserWorkoutAsync(CreateWorkoutModel model);
         Task UpdateUserWorkoutAsync(UpdateWorkoutModel model);
         Task RemoveUserWorkoutAsync(RemoveUserWorkout model);
