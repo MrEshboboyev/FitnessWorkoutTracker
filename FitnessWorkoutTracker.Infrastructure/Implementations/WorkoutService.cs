@@ -1,5 +1,6 @@
 ﻿using FitnessWorkoutTracker.Application.Common.Interfaces;
 using FitnessWorkoutTracker.Application.Common.Models;
+using FitnessWorkoutTracker.Application.DTOs;
 using FitnessWorkoutTracker.Application.Services.Interfaces;
 using FitnessWorkoutTracker.Domain.Entities;
 
@@ -13,6 +14,18 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         public WorkoutService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IEnumerable<Workout>> GetAllWorkoutsAsync()
+        {
+            try
+            {
+                return _unitOfWork.Workout.GetAll(); 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Workout>> GetUserWorkoutsAsync(string userId)
@@ -52,15 +65,15 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         }
 
 
-        public async Task CreateUserWorkoutAsync(CreateWorkoutModel model)
+        public async Task CreateUserWorkoutAsync(WorkoutCreateDTO workoutCreateDTO)
         {
             try
             {
                 Workout workout = new()
                 {
-                    Name = model.Name,
-                    Date = model.Date,
-                    UserId = model.UserId
+                    Name = workoutCreateDTO.Name,
+                    Date = workoutCreateDTO.Date,
+                    UserId = workoutCreateDTO.UserId
                 };
                 _unitOfWork.Workout.Add(workout);
                 _unitOfWork.Save();
@@ -71,15 +84,16 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             }
         }
 
-        public async Task UpdateUserWorkoutAsync(UpdateWorkoutModel model)
+        public async Task UpdateUserWorkoutAsync(WorkoutUpdateDTO workoutUpdateDTO)
         {
             try
             {
-                var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == model.UserId && w.Id == model.Id);
+                var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == workoutUpdateDTO.UserId 
+                    && w.Id == workoutUpdateDTO.Id);
 
                 // update fields
-                workoutFromDb.Date = model.Date;
-                workoutFromDb.Name = model.Name;
+                workoutFromDb.Date = workoutUpdateDTO.Date;
+                workoutFromDb.Name = workoutUpdateDTO.Name;
 
                 _unitOfWork.Workout.Update(workoutFromDb);
                 _unitOfWork.Save();
@@ -90,11 +104,12 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             }
         }
 
-        public async Task RemoveUserWorkoutAsync(RemoveUserWorkout model)
+        public async Task RemoveUserWorkoutAsync(WorkoutRemoveDTO workoutRemoveDTO)
         {
             try
             {
-                var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == model.UserId && w.Id == model.Id);
+                var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == workoutRemoveDTO.UserId 
+                    && w.Id == workoutRemoveDTO.Id);
 
                 _unitOfWork.Workout.Remove(workoutFromDb);
                 _unitOfWork.Save();

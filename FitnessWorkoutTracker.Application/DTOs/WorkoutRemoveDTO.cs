@@ -1,6 +1,6 @@
-﻿namespace FitnessWorkoutTracker.Application.Common.Models
+﻿namespace FitnessWorkoutTracker.Application.DTOs
 {
-    public class RemoveUserWorkout
+    public class WorkoutRemoveDTO
     {
         public Guid Id { get; set; }
         public string UserId { get; set; }
