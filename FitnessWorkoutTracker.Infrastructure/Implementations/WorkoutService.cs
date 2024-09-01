@@ -1,5 +1,4 @@
 ﻿using FitnessWorkoutTracker.Application.Common.Interfaces;
-using FitnessWorkoutTracker.Application.Common.Models;
 using FitnessWorkoutTracker.Application.DTOs;
 using FitnessWorkoutTracker.Application.Services.Interfaces;
 using FitnessWorkoutTracker.Domain.Entities;
@@ -90,6 +89,9 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             {
                 var workoutFromDb = _unitOfWork.Workout.Get(w => w.UserId == workoutUpdateDTO.UserId 
                     && w.Id == workoutUpdateDTO.Id);
+
+                if (workoutFromDb == null)
+                    throw new Exception("Workout not found!");
 
                 // update fields
                 workoutFromDb.Date = workoutUpdateDTO.Date;

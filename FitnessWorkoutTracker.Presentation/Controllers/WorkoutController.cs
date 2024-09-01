@@ -103,8 +103,11 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
 
 
         [HttpPut("update-user-workout")]
-        public async Task<IActionResult> UpdateWorkoutAsync([FromBody] UpdateWorkoutModel model)
+        public async Task<IActionResult> UpdateWorkoutAsync(Guid workoutId, [FromBody] UpdateWorkoutModel model)
         {
+            if (workoutId != model.Id || !ModelState.IsValid)
+                return BadRequest("Error with entered values!");
+
             try
             {
                 WorkoutUpdateDTO workoutUpdateDTO = new()
