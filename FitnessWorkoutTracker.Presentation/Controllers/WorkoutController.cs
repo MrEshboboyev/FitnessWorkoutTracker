@@ -93,14 +93,14 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
         }
         
         [HttpGet("get-user-past-workouts")]
-        public async Task<IActionResult> GetUserPastWorkoutsAsync([FromBody] QueryWorkoutModel model)
+        public async Task<IActionResult> GetUserPastWorkoutsAsync(DateTime startDate, DateTime endDate)
         {
             try
             {
                 WorkoutQueryDTO workoutQueryDTO = new()
                 { 
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
+                    StartDate = startDate,
+                    EndDate = endDate,
                     UserId = GetUserId()
                 };
 
@@ -114,18 +114,19 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
         }
 
         [HttpGet("get-user-finished-workouts-percentage")]
-        public async Task<IActionResult> GetUserFinishedWorkoutsPercentageAsync([FromBody] QueryWorkoutModel model)
+        public async Task<IActionResult> GetUserFinishedWorkoutsPercentageAsync(DateTime startDate, DateTime endDate)
         {
             try
             {
                 WorkoutQueryDTO workoutQueryDTO = new()
                 {
-                    StartDate = model.StartDate,
-                    EndDate = model.EndDate,
+                    StartDate = startDate,
+                    EndDate = endDate,
                     UserId = GetUserId()
                 };
 
-                return Ok(await _workoutService.GetFinishedWorkoutsPercentageAsync(workoutQueryDTO));
+                var percentage = await _workoutService.GetFinishedWorkoutsPercentageAsync(workoutQueryDTO);
+                return Ok(new { StartDate = startDate, EndDate = endDate, FinishedPercentage = percentage });
             }
             catch (Exception ex)
             {
