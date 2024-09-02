@@ -16,7 +16,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         }
 
 
-        public async Task<IEnumerable<Comment>> GetUserComments(string userId)
+        public async Task<IEnumerable<Comment>> GetUserCommentsAsync(string userId)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             }
         }
 
-        public async Task<IEnumerable<Comment>> GetWorkoutComments(Guid workoutId)
+        public async Task<IEnumerable<Comment>> GetWorkoutCommentsAsync(Guid workoutId)
         {
             try
             {
