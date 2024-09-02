@@ -91,6 +91,47 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpGet("get-user-past-workouts")]
+        public async Task<IActionResult> GetUserPastWorkoutsAsync([FromBody] QueryWorkoutModel model)
+        {
+            try
+            {
+                WorkoutQueryDTO workoutQueryDTO = new()
+                { 
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    UserId = GetUserId()
+                };
+
+
+                return Ok(await _workoutService.GetPastWorkoutsAsync(workoutQueryDTO));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get-user-finished-workouts-percentage")]
+        public async Task<IActionResult> GetUserFinishedWorkoutsPercentageAsync([FromBody] QueryWorkoutModel model)
+        {
+            try
+            {
+                WorkoutQueryDTO workoutQueryDTO = new()
+                {
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    UserId = GetUserId()
+                };
+
+                return Ok(await _workoutService.GetFinishedWorkoutsPercentageAsync(workoutQueryDTO));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
         [HttpPost("create-workout")]
@@ -113,7 +154,6 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpPut("update-user-workout")]
         public async Task<IActionResult> UpdateWorkoutAsync(Guid workoutId, [FromBody] UpdateWorkoutModel model)
