@@ -80,6 +80,39 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         }
 
 
+        public async Task<IEnumerable<Workout>> GetPastWorkoutsAsync(WorkoutQueryDTO workoutQueryDTO)
+        {
+            try
+            {
+                return _unitOfWork.Workout.GetAll(w => 
+                    w.UserId == workoutQueryDTO.UserId 
+                    && w.Date >= workoutQueryDTO.StartDate
+                    && w.Date <= workoutQueryDTO.EndDate,
+                    includeProperties: "Exercises,Comments");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<double> GetFinishedWorkoutsPercentageAsync(WorkoutQueryDTO workoutQueryDTO)
+        {
+            try
+            {
+                var workouts = await GetPastWorkoutsAsync(workoutQueryDTO);
+                int totalWorkouts = workouts.Count();
+                int finishedWorkouts = workouts.Count(w => w.IsFinished);
+
+                return totalWorkouts > 0 ? ((double)finishedWorkouts/totalWorkouts * 100) : 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
         public async Task CreateUserWorkoutAsync(WorkoutCreateDTO workoutCreateDTO)
         {
             try
