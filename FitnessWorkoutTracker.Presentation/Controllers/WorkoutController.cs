@@ -79,6 +79,19 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
             }
         }
 
+        [HttpGet("get-user-active-workouts")]
+        public async Task<IActionResult> GetUserActiveWorkoutsAsync()
+        {
+            try
+            {
+                return Ok(await _workoutService.GetUserActiveWorkoutsAsync(GetUserId()));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpPost("create-workout")]
         public async Task<IActionResult> CreateWorkoutAsync([FromBody] CreateWorkoutModel model)
@@ -87,7 +100,7 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
             {
                 WorkoutCreateDTO workoutCreateDTO = new()
                 {
-                    Date = DateTime.UtcNow,
+                    Date = model.Date,
                     Name = model.Name,
                     UserId = GetUserId()
                 };

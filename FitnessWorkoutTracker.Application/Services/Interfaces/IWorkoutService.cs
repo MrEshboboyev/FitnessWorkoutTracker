@@ -1,5 +1,4 @@
-﻿using FitnessWorkoutTracker.Application.Common.Models;
-using FitnessWorkoutTracker.Application.DTOs;
+﻿using FitnessWorkoutTracker.Application.DTOs;
 using FitnessWorkoutTracker.Domain.Entities;
 
 namespace FitnessWorkoutTracker.Application.Services.Interfaces
@@ -10,6 +9,7 @@ namespace FitnessWorkoutTracker.Application.Services.Interfaces
         Task<IEnumerable<Workout>> GetUserWorkoutsAsync(string userId);
         Task<IEnumerable<Workout>> GetUserWorkoutsByWorkoutNameAsync(string userId, string workoutName);
         Task<IEnumerable<Workout>> GetWorkoutsByWorkoutNameAsync(string workoutName);
+        Task<IEnumerable<Workout>> GetUserActiveWorkoutsAsync(string userId);
         Task CreateUserWorkoutAsync(WorkoutCreateDTO workoutCreateDTO);
         Task UpdateUserWorkoutAsync(WorkoutUpdateDTO workoutUpdateDTO);
         Task RemoveUserWorkoutAsync(WorkoutRemoveDTO workoutRemoveDTO);

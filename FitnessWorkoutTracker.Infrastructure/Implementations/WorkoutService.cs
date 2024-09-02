@@ -66,6 +66,19 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
             }
         }
 
+        public async Task<IEnumerable<Workout>> GetUserActiveWorkoutsAsync(string userId)
+        {
+            try
+            {
+                return _unitOfWork.Workout.GetAll(w => w.UserId == userId && w.Date >= DateTime.UtcNow, 
+                    includeProperties: "Exercises,Comments");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public async Task CreateUserWorkoutAsync(WorkoutCreateDTO workoutCreateDTO)
         {
