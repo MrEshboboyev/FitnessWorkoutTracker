@@ -39,6 +39,13 @@ namespace FitnessWorkoutTracker.Infrastructure.Data
                 .WithOne(c => c.Workout)
                 .HasForeignKey(c => c.WorkoutId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // Configuring One-to-Many relationship between User and Comments
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Comments)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

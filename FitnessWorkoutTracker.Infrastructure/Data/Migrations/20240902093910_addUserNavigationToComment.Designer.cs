@@ -3,6 +3,7 @@ using System;
 using FitnessWorkoutTracker.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FitnessWorkoutTracker.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240902093910_addUserNavigationToComment")]
+    partial class addUserNavigationToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,7 +118,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Data.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("FitnessWorkoutTracker.Domain.Entities.Exercise", b =>
@@ -141,7 +144,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Data.Migrations
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("Exercises", (string)null);
+                    b.ToTable("Exercises");
                 });
 
             modelBuilder.Entity("FitnessWorkoutTracker.Domain.Entities.Workout", b =>
@@ -165,7 +168,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Workouts", (string)null);
+                    b.ToTable("Workouts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -8,5 +8,6 @@ namespace FitnessWorkoutTracker.Domain.Entities
 
         // Navigation Property
         public ICollection<Workout> Workouts { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
