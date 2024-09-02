@@ -1,4 +1,6 @@
-﻿namespace FitnessWorkoutTracker.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace FitnessWorkoutTracker.Domain.Entities
 {
     public class Comment
     {
@@ -9,6 +11,7 @@
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation Properties
+        [JsonIgnore]
         public Workout Workout { get; set; }
         public ApplicationUser User { get; set; }
     }

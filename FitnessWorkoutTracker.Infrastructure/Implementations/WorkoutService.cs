@@ -19,7 +19,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                return _unitOfWork.Workout.GetAll(); 
+                return _unitOfWork.Workout.GetAll(includeProperties: "Exercises,Comments"); 
             }
             catch (Exception ex)
             {
@@ -31,7 +31,8 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                return _unitOfWork.Workout.GetAll(w => w.UserId == userId); 
+                return _unitOfWork.Workout.GetAll(w => w.UserId == userId,
+                    includeProperties: "Exercises,Comments"); 
             }
             catch (Exception ex)
             {
@@ -43,7 +44,8 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                return _unitOfWork.Workout.GetAll(w => w.Name == workoutName);
+                return _unitOfWork.Workout.GetAll(w => w.Name == workoutName, 
+                    includeProperties: "Exercises,Comments");
             }
             catch (Exception ex)
             {
@@ -55,7 +57,8 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
         {
             try
             {
-                return _unitOfWork.Workout.GetAll(w => w.UserId == userId && w.Name == workoutName);
+                return _unitOfWork.Workout.GetAll(w => w.UserId == userId && w.Name == workoutName, 
+                    includeProperties: "Exercises,Comments");
             }
             catch (Exception ex)
             {
