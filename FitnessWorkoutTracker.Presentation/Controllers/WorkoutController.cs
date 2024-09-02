@@ -166,8 +166,9 @@ namespace FitnessWorkoutTracker.Presentation.Controllers
                 WorkoutUpdateDTO workoutUpdateDTO = new()
                 {
                     Id = model.Id,
-                    Date = DateTime.UtcNow,
+                    Date = model.Date,
                     Name = model.Name,
+                    IsFinished = model.IsFinished,
                     UserId = GetUserId()
                 };
 

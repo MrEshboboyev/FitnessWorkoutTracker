@@ -145,6 +145,7 @@ namespace FitnessWorkoutTracker.Infrastructure.Implementations
                 // update fields
                 workoutFromDb.Date = workoutUpdateDTO.Date;
                 workoutFromDb.Name = workoutUpdateDTO.Name;
+                workoutFromDb.IsFinished = workoutUpdateDTO.IsFinished;
 
                 _unitOfWork.Workout.Update(workoutFromDb);
                 _unitOfWork.Save();
